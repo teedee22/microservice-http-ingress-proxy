@@ -1,0 +1,14 @@
+version: "3.7"
+
+services:
+    nats:
+        image: nats:latest
+        hostname: nats
+        ports:
+            - 4222:4222
+    hello_gitlab:
+        build:
+            dockerfile: Dockerfile
+            context: ./
+        ports:
+            - 5000:5000
