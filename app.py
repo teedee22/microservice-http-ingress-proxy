@@ -29,5 +29,12 @@ def new():
     asyncio.run(publish_nats(json.dumps(request.json), "nats://nats:4222", "foobar"))
     return jsonify(payload)
 
+@app.route("/new2", methods=['POST'])
+def new2():
+    data = request.json
+    payload = {"message": f"Your message {data['message']} has been published to nats"}
+    asyncio.run(publish_nats(json.dumps(request.json), "nats://nats:4222", "foobar2"))
+    return jsonify(payload)
+
 if __name__ == "__main__":
     app.run(host="0.0.0.0", port=5000, debug = True)
