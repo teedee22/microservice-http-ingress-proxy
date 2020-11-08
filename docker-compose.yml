@@ -1,14 +1,25 @@
 version: "3.7"
 
+networks:
+    microservice:
+        external:
+            name: microservice
+
 services:
     nats:
         image: nats:latest
         hostname: nats
+        networks:
+        - microservice
         ports:
             - 4222:4222
-    hello_gitlab:
+    proxy:
         build:
             dockerfile: Dockerfile
             context: ./
         ports:
             - 5000:5000
+        networks: 
+        - microservice
+        environment:
+            - PYTHONUNBUFFERED=1
