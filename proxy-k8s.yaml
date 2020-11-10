@@ -15,8 +15,8 @@ spec:
     spec:
       containers:
       - name: micro-proxy
-        image: micro-proxy:latest
-        imagePullPolicy: Never
+        image: teedee22/m-http-proxy:latest
+        imagePullPolicy: Always
         ports:
         - containerPort: 5000
         env:
