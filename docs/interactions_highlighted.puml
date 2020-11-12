@@ -9,11 +9,17 @@
 ' }
 ' </style>
 
+skinparam frame {
+    borderColor Red
+}
+
 caption <b>System Interaction Diagram</b> 
 footer  Last Update: 2020-11-12
 
 actor postman as "Postman"
+frame "You are here" {
 boundary http_ingress as "HTTP Ingress" #FFCD28
+}
 queue nats as "Nats"
 entity python_worker as "Python Worker"
 entity python_api as "Python API"
