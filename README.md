@@ -7,8 +7,9 @@ Proxy receives a payload via http and publishes onto NATS
 ![Interaction Diagram](./docs/interactions_highlighted.png)
 
 ## Endpoints
-| Endpoint | REST | NATS | Description |
+| Endpoint | REST | NATS subject | Description |
 |---|---|---|---|
+|/ | GET | n/a | *returns a healthcheck message* |
 | /new | POST | foobar | *Passes through to nats channel foobar, which python worker (sleepy worker) picks up*
 | /new2 | POST | foobar2 | *python worker calls python API from this route* |
 
