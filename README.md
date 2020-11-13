@@ -4,7 +4,7 @@
 Outer proxy entry to system.
 Proxy receives a payload via http and publishes onto NATS
 
-![Interaction Diagram](./docs/interactions_highlighted.png)
+![Interaction Diagram](./docs/interaction-diagram.png)
 
 ## Endpoints
 | Endpoint | REST | NATS subject | Description |
@@ -20,4 +20,23 @@ Proxy receives a payload via http and publishes onto NATS
     "count": 4,
     "id": 0
 }
+```
+
+## k8s deployment
+
+```bash
+kubectl apply -f nats-k8s.yaml
+kubectl apply -f proxy-k8s.yaml
+```
+
+**Minikube note:**
+
+If using minikube, you'll need tunnel to make the loadbalancer work
+```bash
+minikube tunnel
+```
+
+you can also run the dashboard from:
+```bash
+minikube dashboard
 ```

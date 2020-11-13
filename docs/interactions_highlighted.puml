@@ -1,13 +1,4 @@
-@startuml
-' ' skinparam rectangle {
-' '     roundCorner 25
-
-' ' }
-' <style>
-' footer {
-'   HorizontalAlignment right
-' }
-' </style>
+@startuml interaction-diagram
 
 skinparam frame {
     borderColor Red
@@ -16,7 +7,7 @@ skinparam frame {
 caption <b>System Interaction Diagram</b> 
 footer  Last Update: 2020-11-12
 
-actor postman as "Postman"
+actor user as "User"
 frame "You are here" {
 boundary http_ingress as "HTTP Ingress" #FFCD28
 }
@@ -24,7 +15,7 @@ queue nats as "Nats"
 entity python_worker as "Python Worker"
 entity python_api as "Python API"
 
-postman -> http_ingress : <i>REST into k8s</i>
+user -> http_ingress : <i>Http into k8s</i>
 http_ingress -> nats 
 python_worker ..> nats 
 nats ..> python_worker
