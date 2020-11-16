@@ -1,11 +1,11 @@
 build:
-  image: docker:19.03.12
   stage: build
-  services:
-    - docker:19.03.12-dind
-  variables:
-    IMAGE_TAG: $CI_REGISTRY_IMAGE:latest
+  image:
+    name: gcr.io/kaniko-project/executor:debug
+    entrypoint: [""]
   script:
-    - docker login -u $CI_REGISTRY_USER -p $CI_REGISTRY_PASSWORD $CI_REGISTRY
-    - docker build -t $IMAGE_TAG .
-    - docker push $IMAGE_TAG
+    # This line provides credentials back to the repo that built it
+    - echo "{\"auths\":{\"$CI_REGISTRY\":{\"username\":\"$CI_REGISTRY_USER\",\"password\":\"$CI_REGISTRY_PASSWORD\"}}}" > /kaniko/.docker/config.json
+    # This line builds the image based on the dockerfile provided
+    # Env var list from: https://docs.gitlab.com/ee/ci/variables/#list-all-environment-variables
+    - /kaniko/executor --context $CI_PROJECT_DIR --dockerfile $CI_PROJECT_DIR/Dockerfile --destination $CI_REGISTRY
