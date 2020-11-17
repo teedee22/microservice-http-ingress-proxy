@@ -20,7 +20,8 @@ build:
 deploy_staging:
   stage: deploy
   script:
-    - echo "Deploying to staging server"
+    - kubectl apply -f nats-k8s.yaml
+    - kubectl apply -f proxy-k8s.yaml
   environment:
     name: staging
     url: http://34.76.117.74:4000/
