@@ -23,4 +23,4 @@ deploy_staging:
     - echo "Deploying to staging server"
   environment:
     name: staging
-    url: https://34.76.117.74
+    url: https://34.76.117.74:4000/
