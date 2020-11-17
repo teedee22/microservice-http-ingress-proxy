@@ -1,3 +1,12 @@
+stages:
+  - test
+  - build
+  - deploy
+
+test:
+  stage: test
+  script: echo "Running tests"
+
 build:
   stage: build
   image:
@@ -7,3 +16,11 @@ build:
   script:
   - echo "{\"auths\":{\"$CI_REGISTRY\":{\"username\":\"$CI_REGISTRY_USER\",\"password\":\"$CI_REGISTRY_PASSWORD\"}}}" > /kaniko/.docker/config.json
   - "/kaniko/executor --context $CI_PROJECT_DIR --dockerfile $CI_PROJECT_DIR/Dockerfile --destination $CI_REGISTRY_IMAGE"
+
+deploy_staging:
+  stage: deploy
+  script:
+    - echo "Deploying to staging server"
+  environment:
+    name: staging
+    url: https://34.76.117.74
