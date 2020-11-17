@@ -19,6 +19,7 @@ build:
 
 deploy_staging:
   stage: deploy
+  image: bitnami/kubectl:latest
   script:
     - kubectl apply -f nats-k8s.yaml
     - kubectl apply -f proxy-k8s.yaml
