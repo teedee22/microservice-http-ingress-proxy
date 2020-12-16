@@ -1,7 +1,6 @@
 stages:
   - test
   - build
-  - deploy
 
 test:
   stage: test
@@ -15,14 +14,20 @@ build:
     - ''
   script:
   - echo "{\"auths\":{\"$CI_REGISTRY\":{\"username\":\"$CI_REGISTRY_USER\",\"password\":\"$CI_REGISTRY_PASSWORD\"}}}" > /kaniko/.docker/config.json
-  - "/kaniko/executor --context $CI_PROJECT_DIR --dockerfile $CI_PROJECT_DIR/Dockerfile --destination $CI_REGISTRY_IMAGE"
+  - "/kaniko/executor 
+    --context $CI_PROJECT_DIR 
+    --dockerfile $CI_PROJECT_DIR/Dockerfile 
+    --destination $CI_REGISTRY_IMAGE:$CI_COMMIT_TAG"
+  rules:
+  - if: '$CI_COMMIT_TAG != null'
 
-deploy_staging:
-  stage: deploy
-  image: bitnami/kubectl:latest
-  script:
-    - kubectl apply -f nats-k8s.yaml
-    - kubectl apply -f proxy-k8s.yaml
-  environment:
-    name: staging
-    url: http://34.76.117.74:4000/
+# deploy_staging:
+#   stage: deploy
+#   image: bitnami/kubectl:latest
+#   script:
+#     - kubectl apply -f nats-k8s.yaml
+#     - kubectl apply -f proxy-k8s.yaml
+#   environment:
+#     name: staging
+#     url: http://34.76.117.74:4000/
+  
