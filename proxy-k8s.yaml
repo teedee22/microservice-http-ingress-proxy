@@ -15,7 +15,7 @@ spec:
     spec:
       containers:
       - name: micro-proxy
-        image: registry.gitlab.com/teedee22/http-proxy
+        image: registry.gitlab.com/teedeemicro/http-proxy:0.0.2
         imagePullPolicy: Always
         ports:
         - containerPort: 5000
