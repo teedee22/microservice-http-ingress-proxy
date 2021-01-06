@@ -18,7 +18,7 @@ async def publish_nats(payload, host, channel):
 
 @app.route("/")
 def hello_gitlab():
-    message = "Hello, Gitlab how are you"
+    message = "Hello, Healthcheck confirms proxy up and running"
     payload = {"message": message}
     return jsonify(payload)
 
